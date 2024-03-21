@@ -1,0 +1,7 @@
+﻿<StaticWebAssets Version="1.0">
+  <ContentRoot BasePath="_content/Microsoft.AspNetCore.Components.WebAssembly.Authentication" Path="C:\Users\Cavigo\.nuget\packages\microsoft.aspnetcore.components.webassembly.authentication\5.0.6\build\..\staticwebassets\" />
+  <ContentRoot BasePath="/" Path="E:\Sem4\APBD\cwiczenia12_jb-KKlodawski\MovieApp\Client\bin\Debug\net5.0\wwwroot\" />
+  <ContentRoot BasePath="/" Path="E:\Sem4\APBD\cwiczenia12_jb-KKlodawski\MovieApp\Client\obj\Debug\net5.0\scopedcss\bundle\" />
+  <ContentRoot BasePath="/" Path="E:\Sem4\APBD\cwiczenia12_jb-KKlodawski\MovieApp\Client\wwwroot\" />
+  <ContentRoot BasePath="/Identity" Path="C:\Users\Cavigo\.nuget\packages\microsoft.aspnetcore.identity.ui\5.0.6\staticwebassets\V4\" />
+</StaticWebAssets>

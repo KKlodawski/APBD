@@ -1,0 +1,147 @@
+﻿@page "/movie/add"
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@using MovieApp.Shared
+@using MovieApp.Shared.DTOs
+@using System.Text.Json
+@attribute [Authorize]
+@inject HttpClient httpClient
+@inject IJSRuntime js
+<h3>MovieAdd</h3>
+@if (persons != null && genres != null)
+{
+  <form class="form-container">
+    <div class="form-group">
+      <label for="title">Title:</label>
+      <input type="text" class="form-control" @bind="movie.Title">
+    </div>
+
+    <div class="form-group">
+      <label for="summary">Summary:</label>
+      <textarea class="form-control" rows="3" @bind="movie.Summary"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="inTheaters">In Theaters:</label>
+      <input type="checkbox" class="form-control" @bind="movie.InTheaters">
+    </div>
+
+    <div class="form-group">
+      <label for="trailer">Trailer:</label>
+      <input type="text" class="form-control" @bind="movie.Trailer">
+    </div>
+
+    <div class="form-group">
+      <label for="releaseDate">Release Date:</label>
+      <input type="date" class="form-control" @bind="movie.ReleaseDate">
+    </div>
+
+    <div class="form-group">
+      <label for="poster">Poster:</label>
+      <input type="text" class="form-control" @bind="movie.Poster">
+    </div>
+
+    <div class="form-group">
+      <label for="genres">Genres:</label>
+      <select class="form-control" @bind="genre">
+        <option value="0">None</option>
+        @foreach (var genre in genres)
+        {
+          <option value="@genre.Id">@genre.Name</option>
+        }
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="persons">Persons:</label>
+      <select class="form-control" @bind="person">
+        <option value="0">None</option>
+        @foreach (var person in persons)
+        {
+          <option value="@person.Id">@person.Name</option>
+        }
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="poster">Character:</label>
+      <input type="text" class="form-control" @bind="character">
+    </div>
+    <div class="form-group">
+      <label for="poster">Order:</label>
+      <input type="number" class="form-control" @bind="order">
+    </div>
+    
+    <button type="button" class="btn btn-primary" @onclick="AddMovie">Submit</button>
+  </form>
+}
+else
+{
+  <p>Loading</p>
+}
+<a class="btn btn-info" href="/movies">Powrót</a>
+
+
+@code {
+    public Movie movie { get; set; } = new Movie();
+    public List<Genre> genres { get; set; } = new List<Genre>();
+    public List<Person> persons { get; set; } = new List<Person>();
+    public int genre { get; set; }
+    public int person { get; set; }
+    public string? character { get; set; } = null;
+    public int? order { get; set; } = null;
+    
+    protected async override Task OnInitializedAsync()
+    {
+        await GetInfo();
+    }
+
+    private async Task GetInfo()
+    {
+      var responseHTTPgenres = await httpClient.GetAsync($"https://localhost:44311/api/movies/genres");
+      var responseHTTPpersons = await httpClient.GetAsync($"https://localhost:44311/api/movies/persons");
+      
+      if (responseHTTPgenres.IsSuccessStatusCode && responseHTTPpersons.IsSuccessStatusCode)
+        {
+            var responseStringGenres = await responseHTTPgenres.Content.ReadAsStringAsync();
+            var responseStringPersons = await responseHTTPpersons.Content.ReadAsStringAsync();
+            
+            genres = System.Text.Json.JsonSerializer.Deserialize<List<Genre>>(responseStringGenres, new System.Text.Json.JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+            persons = System.Text.Json.JsonSerializer.Deserialize<List<Person>>(responseStringPersons, new System.Text.Json.JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+
+        }
+    }
+
+  public async Task AddMovie()
+  {
+    if (movie.Title != null && movie.Summary != null && movie.Trailer != null && movie.ReleaseDate != null && movie.Poster != null)
+    {
+      if (person != 0 && (character == null || order == null)) await js.InvokeVoidAsync("alert", "Brakuje danych dotyczących osoby");
+      else
+      {
+        MovieAddDto newMovie = new MovieAddDto
+        {
+          Title = movie.Title,
+          Summary = movie.Summary,
+          InTheaters = movie.InTheaters,
+          Trailer = movie.Trailer,
+          ReleaseDate = movie.ReleaseDate,
+          Poster = movie.Poster,
+          GenreId = genre,
+          PersonId = person,
+          Character = character,
+          Order = order
+        };
+        var json = JsonSerializer.Serialize(newMovie);
+        var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+        var responseHTTP = await httpClient.PostAsync($"https://localhost:44311/api/movies/add", content);
+        if (responseHTTP.IsSuccessStatusCode) await js.InvokeVoidAsync("alert", "Dodano pomyślnie!");
+        else await js.InvokeVoidAsync("alert", "Dodanie nie powiodło się!");
+      }
+    }
+    else
+    {
+      await js.InvokeVoidAsync("alert", "Nie podano wszyskich danych!");
+    }
+  }
+
+}

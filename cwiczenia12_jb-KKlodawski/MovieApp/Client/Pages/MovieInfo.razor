@@ -1,0 +1,56 @@
+﻿@page "/movie/{id}/{Title}"
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@using MovieApp.Shared
+@attribute [Authorize]
+@inject HttpClient httpClient
+
+<h3>Movie Info</h3>
+@if (movie == null)
+{
+    <p class="mt-4">Loading</p>
+}
+else {
+    <div class="mt-4">
+            <h5>Poster:</h5>
+            <img src="@movie.Poster" alt="Poster" class="movie-poster"/>
+    
+            <h5>Title:</h5>
+            <p>@movie.Title</p>
+    
+            <h5>Summary:</h5>
+            <p>@movie.Summary</p>
+    
+            <h5>Release Date:</h5>
+            <p>@movie.ReleaseDate?.ToString("yyyy-MM-dd")</p>
+    
+            <h5>Trailer:</h5>
+            <a href="@movie.Trailer">Trailer</a>
+        </div>
+}
+<a class="btn btn-info mt-4" href="/movies">Powrót</a>
+
+@code {
+    [Parameter]
+    public string id { get; set; }
+
+    [Parameter]
+    public string Title { get; set; }
+    public Movie movie { get; set; }
+    
+    protected async override Task OnInitializedAsync()
+    {
+        await GetMovie();
+    }
+
+    private async Task GetMovie()
+    {
+        var responseHTTP = await httpClient.GetAsync($"https://localhost:44311/api/movies/single/{id}");
+        
+        if (responseHTTP.IsSuccessStatusCode)
+        {
+            var responseString = await responseHTTP.Content.ReadAsStringAsync();
+            movie = System.Text.Json.JsonSerializer.Deserialize<Movie>(responseString, new System.Text.Json.JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+        }
+    }
+}

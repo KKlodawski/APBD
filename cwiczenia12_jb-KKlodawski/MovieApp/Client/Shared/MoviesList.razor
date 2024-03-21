@@ -1,0 +1,41 @@
+﻿@inject IJSRuntime js
+@inject HttpClient httpClient
+
+<div class="movies-container mt-4">
+    <GenericList List="Movies">
+        <ElementTemplate Context="movie">
+            <IndividualMovie Movie="movie"
+                             DeleteMovie="DeleteMovie" @key="movie.Id" />
+        </ElementTemplate>
+    </GenericList>
+</div>
+
+@code {
+    [Parameter] public List<Movie> Movies { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+    }
+
+    private async Task DeleteMovie(Movie movie)
+    {
+        await js.MyFunction("custom message");
+        var confirmed = await js.Confirm($"Are you sure you want to delete {movie.Title}?");
+        
+        if (confirmed)
+        {
+            var responseHTTP = await httpClient.DeleteAsync($"https://localhost:44311/api/movies/del/{movie.Id}");
+            
+            if (responseHTTP.IsSuccessStatusCode)
+            {
+                Movies.Remove(movie);
+                await js.InvokeVoidAsync("alert", "Usunięto film!");
+            }
+            else
+            {
+                await js.InvokeVoidAsync("alert", "Nie udało się usunąć filmu!");
+            }
+        }
+    }
+}

@@ -1,0 +1,84 @@
+﻿@page "/movies/edit/{id}"
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@using MovieApp.Shared
+@using System.Text.Json
+@attribute [Authorize]
+@inject HttpClient httpClient
+@inject IJSRuntime js
+
+<h3>MovieEdit</h3>
+
+@if (movie == null)
+{
+    <p>Loading</p>
+}
+else
+{
+    <form class="form-container">
+        <input type="hidden" @bind="movieToUpdate.Id">
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" class="form-control" @bind="movieToUpdate.Title">
+        </div>
+        <div class="form-group">
+            <label for="summary">Summary:</label>
+            <textarea class="form-control" @bind="movieToUpdate.Summary"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="inTheaters">In Theaters:</label>
+            <input type="checkbox" class="form-control" @bind="movieToUpdate.InTheaters">
+        </div>
+        <div class="form-group">
+            <label for="trailer">Trailer:</label>
+            <input type="text" class="form-control" @bind="movieToUpdate.Trailer">
+        </div>
+        <div class="form-group">
+            <label for="releaseDate">Release Date:</label>
+            <input type="date" class="form-control" @bind="movieToUpdate.ReleaseDate">
+        </div>
+        <div class="form-group">
+            <label for="poster">Poster:</label>
+            <input type="text" class="form-control" id="poster" name="poster" @bind="movieToUpdate.Poster">
+        </div>
+        <div class="form-group">
+            <button type="button" class="btn btn-primary form-control" @onclick="EditMovie">Update Movie</button>
+        </div>
+    </form>
+    <a class="btn btn-info" href="/movies">Powrót</a>
+}
+
+@code {
+    [Parameter]
+    public string id { get; set; }
+    public Movie movie { get; set; }
+    private Movie movieToUpdate = new Movie();
+    
+    protected async override Task OnInitializedAsync()
+    {
+        await GetMovie();
+    }
+
+    private async Task GetMovie()
+    {
+        var responseHTTP = await httpClient.GetAsync($"https://localhost:44311/api/movies/single/{id}");
+        
+        if (responseHTTP.IsSuccessStatusCode)
+        {
+            var responseString = await responseHTTP.Content.ReadAsStringAsync();
+            movie = System.Text.Json.JsonSerializer.Deserialize<Movie>(responseString, new System.Text.Json.JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+            movieToUpdate = movie;
+        }
+    }
+
+    public async Task EditMovie()
+    {
+        var json = JsonSerializer.Serialize(movieToUpdate);
+        var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+        
+        var responseHTTP = await httpClient.PostAsync($"https://localhost:44311/api/movies/edit/{id}", content);
+        if (responseHTTP.IsSuccessStatusCode) await js.InvokeVoidAsync("alert", "Edytowano poprawnie!");
+        else await js.InvokeVoidAsync("alert", "Błąd edycji!");
+        
+    }
+}

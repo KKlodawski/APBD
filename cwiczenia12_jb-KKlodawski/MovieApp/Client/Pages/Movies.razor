@@ -1,0 +1,43 @@
+﻿@page "/movies"
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@attribute [Authorize]
+@inject HttpClient httpClient
+@inject IJSRuntime js
+
+<h1>Movies</h1> 
+<div class="mt-4">
+    <h3>Non theaters</h3>
+    <MoviesList Movies="MoviesListNonTheaters"/>
+    <h3>In theaters</h3>
+    <MoviesList Movies="MoviesListTheaters"/>
+    <a class="btn btn-info" href="/movie/add">Dodaj film</a>
+</div>
+
+@code {
+
+    private List<Movie> MoviesListTheaters;
+    private List<Movie> MoviesListNonTheaters;
+    protected async override Task OnInitializedAsync()
+    {
+        await GetMovies();
+    }
+
+    private async Task GetMovies()
+    {
+        var responseHTTP = await httpClient.GetAsync("https://localhost:44311/api/movies");
+
+        if (responseHTTP.IsSuccessStatusCode)
+        {
+            List<Movie> responseList;
+            var responseString = await responseHTTP.Content.ReadAsStringAsync();
+            responseList = System.Text.Json.JsonSerializer.Deserialize<List<Movie>>(responseString, new System.Text.Json.JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+            MoviesListTheaters = responseList.Where(e => e.InTheaters == true).ToList();
+            MoviesListNonTheaters = responseList.Where(e => e.InTheaters == false).ToList();
+        }
+        else
+        {
+            await js.InvokeVoidAsync("alert", "Nie udało się wczytać filmu!");
+        }
+    }
+}

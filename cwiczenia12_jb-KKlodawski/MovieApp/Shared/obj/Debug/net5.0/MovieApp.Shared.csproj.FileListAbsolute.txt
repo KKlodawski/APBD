@@ -1,0 +1,12 @@
+E:\Sem4\APBD\cwiczenia12_jb-KKlodawski\MovieApp\Shared\bin\Debug\net5.0\MovieApp.Shared.deps.json
+E:\Sem4\APBD\cwiczenia12_jb-KKlodawski\MovieApp\Shared\bin\Debug\net5.0\MovieApp.Shared.dll
+E:\Sem4\APBD\cwiczenia12_jb-KKlodawski\MovieApp\Shared\bin\Debug\net5.0\MovieApp.Shared.pdb
+E:\Sem4\APBD\cwiczenia12_jb-KKlodawski\MovieApp\Shared\obj\Debug\net5.0\MovieApp.Shared.csproj.AssemblyReference.cache
+E:\Sem4\APBD\cwiczenia12_jb-KKlodawski\MovieApp\Shared\obj\Debug\net5.0\MovieApp.Shared.GeneratedMSBuildEditorConfig.editorconfig
+E:\Sem4\APBD\cwiczenia12_jb-KKlodawski\MovieApp\Shared\obj\Debug\net5.0\MovieApp.Shared.AssemblyInfoInputs.cache
+E:\Sem4\APBD\cwiczenia12_jb-KKlodawski\MovieApp\Shared\obj\Debug\net5.0\MovieApp.Shared.AssemblyInfo.cs
+E:\Sem4\APBD\cwiczenia12_jb-KKlodawski\MovieApp\Shared\obj\Debug\net5.0\MovieApp.Shared.csproj.CoreCompileInputs.cache
+E:\Sem4\APBD\cwiczenia12_jb-KKlodawski\MovieApp\Shared\obj\Debug\net5.0\MovieApp.Shared.dll
+E:\Sem4\APBD\cwiczenia12_jb-KKlodawski\MovieApp\Shared\obj\Debug\net5.0\refint\MovieApp.Shared.dll
+E:\Sem4\APBD\cwiczenia12_jb-KKlodawski\MovieApp\Shared\obj\Debug\net5.0\MovieApp.Shared.pdb
+E:\Sem4\APBD\cwiczenia12_jb-KKlodawski\MovieApp\Shared\obj\Debug\net5.0\ref\MovieApp.Shared.dll
