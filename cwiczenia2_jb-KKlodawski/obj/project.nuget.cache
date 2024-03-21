@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "C0RwHwYyuu4NVVLbpWeHr4lTIwh/FtHOsOiFhF2skTu1jPHit2fLWoF+FJkHjd1m6bRbJTW/eQZvT1Rh8JMOvQ==",
+  "success": true,
+  "projectFilePath": "E:\\Sem4\\APBD\\cwiczenia2_jb-KKlodawski\\Zadanie2.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Cavigo\\.nuget\\packages\\csvhelper\\30.0.1\\csvhelper.30.0.1.nupkg.sha512",
+    "C:\\Users\\Cavigo\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

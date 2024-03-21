@@ -1,0 +1,15 @@
+Nieunikatowy student Paweł Nowak1 459 12.02.2000 00:00:00 Alina Adam [Informatyka dzienne Dzienne] 
+Nieunikatowy student Paweł Nowak41 4902 12.02.2000 00:00:00 Alina Adam [Sztuka Nowych Mediów zaoczne Zaoczne] 
+Nieunikatowy student Magdalena Nowak66 4629 12.02.2000 00:00:00 Alina Adam [Sztuka Nowych Mediów dzienne Dzienne] 
+Nieunikatowy student Kiyomi Jankowski79 4927 12.02.2000 00:00:00 Alina Adam [Sztuka Nowych Mediów dzienne Dzienne] 
+Nieunikatowy student Kamil Jankowski254 4836 12.02.2000 00:00:00 Alina Adam [Informatyka zaoczne Zaoczne] 
+Nieunikatowy student Jakub Kowalski270 4711 12.02.2000 00:00:00 Alina Adam [Informatyka dzienne Dzienne] 
+Nieunikatowy student Grzegorz Jankowski284 4504 12.02.2000 00:00:00 Alina Adam [Informatyka dzienne po angielsku Dzienne] 
+Nieunikatowy student Grzegorz Jankowski284 4504 12.02.2000 00:00:00 Alina Adam [Informatyka magisterskie 3 sem Dzienne] 
+Nieunikatowy student Adam Kowalski335 4433 12.02.2000 00:00:00 Alina Adam [Informatyka magisterskie 3 sem Dzienne] 
+Nieunikatowy student Jan Nowak336 4557 12.02.2000 00:00:00 Alina Adam [Informatyka dzienne Dzienne] 
+Błąd przy wczytywaniu studenta w wierszu Łukasz,Maciejewski368,Informatyka Społeczna,Dzienne,4496,2000-02-12,368@pjwstk.edu.pl,Alina
+Nieunikatowy student Adrian Brzęczyszczykiewicz367 4384 12.02.2000 00:00:00 Alina Adam [Informatyka zaoczne Zaoczne] 
+Błąd przy wczytywaniu studenta w wierszu Krzysztof,Nowak321,Informatyka zaoczne,Zaoczne,4830,2000-02-12,321@pjwstk.edu.pl,Alina
+Nieunikatowy student Arkadiusz Kowalski370 4111 12.02.2000 00:00:00 Alina Adam [Informatyka dzienne Dzienne] 
+Nieunikatowy student Jakub Nowak371 4484 12.02.2000 00:00:00 Alina Adam [Informatyka dzienne Dzienne] 
